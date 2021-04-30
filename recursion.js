@@ -65,6 +65,7 @@ function joinElements(array, joinString) {
 
 // the function below is my first ever succesful recursive function
 // it doesn't do a whole lot though, just 43618 > 4 + 3 + 6 + 1 + 8 = 22
+// so it's just a reduce... but written as a recursive function!
 
 function digital_root(n) {
   
@@ -85,7 +86,7 @@ function digital_root(n) {
   
 }
 
-// and below here it does the full job of continuing to do it
+// and below here it does the full job of continuing to do it recursively
 
 function digital_root(n) {
 
@@ -127,4 +128,59 @@ function digital_root(n) {
     return n
 
 }
-  
+
+
+// let's write out a factorial function ourselves:
+
+function factorialize(n) {
+
+    const cache = {}
+
+    let runningTotal = 1
+
+    return function recurse(num) {
+        if (num > 1) {
+            if (cache[num]) {
+                console.log('in the cache')
+                runningTotal = runningTotal * cache[num]
+            } else {
+                console.log('normal process')
+                runningTotal = runningTotal * num
+                return recurse(num - 1)
+            }
+        } else {
+            cache[n] = runningTotal
+            console.log(cache[n])
+            return runningTotal
+        }
+    }
+
+}
+
+let memoizedFactorializer = factorialize
+
+console.log(memoizedFactorializer(7))
+console.log(memoizedFactorializer(7))
+console.log(memoizedFactorializer(7))
+
+
+// function factorialize(n) {
+    
+//     let runningTotal = 1
+    
+//     function recurse(n) {
+//         if (n > 1) {
+//             runningTotal = runningTotal * n
+//             return recurse(n - 1)
+//         } else {
+//             return runningTotal
+//         }
+//     }
+    
+//     return recurse(n)
+    
+// }
+
+// console.log(factorialize(5))
+// console.log(factorialize(5))
+// console.log(factorialize(5))
