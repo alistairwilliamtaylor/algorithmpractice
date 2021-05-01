@@ -132,36 +132,49 @@ function digital_root(n) {
 
 // let's write out a factorial function ourselves:
 
-function factorialize(n) {
+function factorialize() {
 
+    // this never resets as long as the overall program runs
     const cache = {}
 
-    let runningTotal = 1
+    return function memofacto(n) {
+        console.log(cache)
 
-    return function recurse(num) {
-        if (num > 1) {
-            if (cache[num]) {
-                console.log('in the cache')
-                runningTotal = runningTotal * cache[num]
+        // these reset every time that a factorial is called
+        let runningTotal = 1
+        
+        function recurse(num) {
+            if (num > 1) {
+                if (cache[num]) {
+                    console.log('in the cache')
+                    runningTotal = runningTotal * cache[num]
+                    cache[n] = runningTotal
+                    return runningTotal
+                } else {
+                    console.log('normal process')
+                    runningTotal = runningTotal * num
+                    return recurse(num - 1)
+                }
             } else {
-                console.log('normal process')
-                runningTotal = runningTotal * num
-                return recurse(num - 1)
+                cache[n] = runningTotal
+                return runningTotal
             }
-        } else {
-            cache[n] = runningTotal
-            console.log(cache[n])
-            return runningTotal
         }
+
+        return recurse(n)
     }
 
 }
 
-let memoizedFactorializer = factorialize
+let memoizedFactorializer = factorialize()
 
 console.log(memoizedFactorializer(7))
 console.log(memoizedFactorializer(7))
 console.log(memoizedFactorializer(7))
+console.log(memoizedFactorializer(7))
+console.log(memoizedFactorializer(8))
+console.log(memoizedFactorializer(8))
+console.log(memoizedFactorializer(8))
 
 
 // function factorialize(n) {
