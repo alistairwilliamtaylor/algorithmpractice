@@ -21,7 +21,7 @@ const memoTimes10 = (n) => {
 // BELOW IS WITH CLOSURE
 
 const memoizedClosureTimes10 = () => {
-    let cache = {}
+    const cache = {}
     return (n) => {
         if (n in cache) {
             return cache[n]
