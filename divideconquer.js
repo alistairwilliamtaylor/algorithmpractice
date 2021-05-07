@@ -72,10 +72,62 @@ function bubbleSort(list) {
 
 }
 
-// const list = [7, 16, 5, 54, 3, 9, 1]
+function bubbleSort(list) {
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 1; j < list.length; j++) {
+            if (list[j - 1] > list[j]) {
+                swap(list, j - 1, j)
+            }
+        }
+    }
+    return list
+}
 
-// console.log(bubbleSort(list))
-// console.log(bubbleSort(list))
-// console.log(bubbleSort(list))
+function swap(array, firstIndex, secondIndex) {
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+  }
+
+const list = [7, 16, 5, 54, 3, 9, 1]
+
+console.log(bubbleSort(list))
+console.log(bubbleSort(list))
+console.log(bubbleSort(list))
 
 // NEXT UP, MERGE SORT - NLOGN TIME
+
+function mergeSort(list) {
+    console.log(list)
+	if (list.length === 1) {
+        return list
+    }
+    let half = Math.ceil(list.length / 2)
+    let L = list.slice(0, half)
+    let R = list.slice(half)
+	let Lsorted = mergeSort(L)
+    // console.log(Lsorted)
+	let Rsorted = mergeSort(R)
+    // console.log(Rsorted)
+	return merge(Lsorted, Rsorted)
+}
+
+function merge(left, right) {
+    let sortedMerge = []
+    let leftPointer = 0
+    let rightPointer = 0
+    while (left[leftPointer] || right[rightPointer]) {
+        if (left[leftPointer] <= right[rightPointer]) {
+            sortedMerge.push(left[leftPointer])
+            leftPointer ++
+        } else {
+            sortedMerge.push(right[rightPointer])
+            rightPointer ++
+        }
+    }
+    return sortedMerge
+}
+
+// console.log(merge([0, 1], [2, 3]))
+
+// console.log(mergeSort([6, 7, 3, 18, 9, 74, 76, 56, 93, 12, 7, 4, 19]))
