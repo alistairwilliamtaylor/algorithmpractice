@@ -53,12 +53,17 @@ function binarySearch(list, item) {
 
 // BELOW IS A BUBBLE SORT (QUADRATIC TIME)
 
-function bubbleSort(list) {
+let bubbledOuter = 0
+let bubbledInner = 0
+
+function bubbledSort(list) {
 
     let sortedList = [...list]
 
     for (let limit = list.length - 1; limit >= 0; limit--) {
+        bubbledOuter ++
         for (let i = 0; i <= limit; i++) {
+            bubbledInner ++
             if (sortedList[i] > sortedList[i+1]) {
                 let greaterVal = sortedList[i]
                 let lesserVal = sortedList[i+1]
@@ -72,9 +77,14 @@ function bubbleSort(list) {
 
 }
 
+let bubbleOuter = 0
+let bubbleInner = 0
+
 function bubbleSort(list) {
     for (let i = 0; i < list.length; i++) {
+        bubbleOuter ++
         for (let j = 1; j < list.length; j++) {
+            bubbleInner ++
             if (list[j - 1] > list[j]) {
                 swap(list, j - 1, j)
             }
@@ -87,13 +97,14 @@ function swap(array, firstIndex, secondIndex) {
     var temp = array[firstIndex];
     array[firstIndex] = array[secondIndex];
     array[secondIndex] = temp;
-  }
+}
 
 const list = [7, 16, 5, 54, 3, 9, 1]
 
-console.log(bubbleSort(list))
-console.log(bubbleSort(list))
-console.log(bubbleSort(list))
+bubbleSort(list)
+bubbledSort(list)
+console.log(`Bubble Outer is ${bubbleOuter} and Bubble Inner is ${bubbleInner}`);
+console.log(`Bubbled Outer is ${bubbledOuter} and Bubbled Inner is ${bubbledInner}`);
 
 // NEXT UP, MERGE SORT - NLOGN TIME
 
