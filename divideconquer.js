@@ -127,7 +127,7 @@ console.log(`Bubble Outer is ${bubbleOuter} and Bubble Inner is ${bubbleInner}`)
 console.log(`Bubbled Outer is ${bubbledOuter} and Bubbled Inner is ${bubbledInner}`);
 
 // NEXT UP, MERGE SORT - NLOGN TIME
-// BELOW IS MY ATTEMPT, WHICH WORKS FOR THE FIRST HALF, THEN BREAKS
+// BELOW IS MY ATTEMPT, WHICH NOW FINALLY WORKS!
 
 function mergeSort(list) {
     console.log(list)
@@ -141,7 +141,7 @@ function mergeSort(list) {
     // console.log(Lsorted)
 	let Rsorted = mergeSort(R)
     // console.log(Rsorted)
-	return courseMerge(Lsorted, Rsorted)
+	return merge(Lsorted, Rsorted)
 }
 
 function merge(left, right) {
@@ -149,7 +149,8 @@ function merge(left, right) {
     let leftPointer = 0
     let rightPointer = 0
     while (left[leftPointer] || right[rightPointer]) {
-        if (left[leftPointer] < right[rightPointer]) {
+        if (left[leftPointer] < right[rightPointer] || !right[rightPointer]) {
+            // adding the OR statement here solves our problem
             sortedMerge.push(left[leftPointer])
             leftPointer ++
         } else {
@@ -158,10 +159,7 @@ function merge(left, right) {
         }
     }
     return sortedMerge
-    // my fuck up was to fail to have the concat here, so I wasn't sweeping up the remaining values... no hang on, I tried to get around that with my logical or as the condition of while loop. But clearly that wasn't doing what I expected of it. No, actually it was doing exactly what I hoped, BUT the first if statement is the problem. Once one of the two array indexes is undefined, any equation evaluates to false, so we ALWAYS went to the else. So if we had something waiting in the leftarray, we completely lost it
 }
-
-// console.log(merge([0, 1], [2, 3]))
 
 console.log(mergeSort([6, 7, 3, 18, 9, 74, 76, 56, 93, 12, 7, 4, 19]))
 
